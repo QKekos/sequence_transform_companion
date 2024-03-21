@@ -1,6 +1,6 @@
 from typing import Iterable
 
-from .site_packages import hid
+from sequence_transform_companion.site_packages import hid
 from .observers import Observer
 
 from .Console import Console

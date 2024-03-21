@@ -4,7 +4,7 @@ from typing import Iterable
 from time import sleep
 
 from .observers import Observer
-from .site_packages import hid
+from sequence_transform_companion.site_packages import hid
 
 from .MonitorDevice import MonitorDevice
 from .Console import Console

@@ -2,7 +2,7 @@
 from typing import TypedDict
 from threading import Thread
 
-from .site_packages import hid
+from sequence_transform_companion.site_packages import hid
 
 
 class Device(TypedDict):
