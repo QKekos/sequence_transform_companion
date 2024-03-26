@@ -1,14 +1,15 @@
 
 from hid_listener import DeviceListener
-from observers import PrintObserver
+from observers import PrintObserver, MissedRulesObserver
 
 
 def main():
     """Acquire debugging information from usb hid devices"""
     print_observer = PrintObserver()
+    missed_rules_observer = MissedRulesObserver()
 
     device_finder = DeviceListener([
-        print_observer,
+        print_observer, missed_rules_observer
     ])
 
     print("Looking for devices...", flush=True)
