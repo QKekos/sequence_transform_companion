@@ -1,6 +1,6 @@
 
-from hid_listener import DeviceListener
-from observers import PrintObserver, MissedRulesObserver
+from sequence_transform_companion.hid_listener import DeviceListener
+from sequence_transform_companion.observers import PrintObserver, MissedRulesObserver
 
 
 def main():
