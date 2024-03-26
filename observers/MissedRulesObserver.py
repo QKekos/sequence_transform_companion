@@ -16,7 +16,7 @@ ahk.run("RemoveToolTip:\nToolTip\nReturn\n")
 
 class MissedRulesObserver:
     def notify(self, message: str) -> None:
-        match = re.findall(r"Missed rule! (.+?) -> (.+?)", message)
+        match = re.findall(r"Missed rule! (.+) -> (.+)", message)
 
         if not match:
             return
