@@ -3,8 +3,8 @@ from threading import Thread
 from typing import Iterable
 from time import sleep
 
-from sequence_transform_companion.observers import Observer
-from sequence_transform_companion.site_packages import hid
+import hid
+from observers import Observer
 
 from .MonitorDevice import MonitorDevice
 from .Console import Console

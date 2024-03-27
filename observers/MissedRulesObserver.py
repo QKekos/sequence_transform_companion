@@ -3,7 +3,7 @@ import re
 import ctypes
 
 from pathlib import Path
-from sequence_transform_companion.site_packages import mss
+import mss
 
 THIS_FOLDER = Path(__file__).parent
 
