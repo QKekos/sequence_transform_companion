@@ -4,7 +4,7 @@ from typing import Iterable
 from time import sleep
 
 import hid
-from observers import Observer
+from observers import Observer  # noqa
 
 from .MonitorDevice import MonitorDevice
 from .Console import Console

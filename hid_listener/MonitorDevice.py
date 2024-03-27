@@ -1,7 +1,7 @@
 from typing import Iterable
 
 import hid
-from observers import Observer
+from observers import Observer  # noqa
 
 from .Console import Console
 from .Device import Device
