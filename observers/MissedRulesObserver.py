@@ -3,7 +3,10 @@ import re
 import ctypes
 
 from pathlib import Path
-import mss
+
+import win32api
+import win32con
+import win32gui  # noqa
 
 THIS_FOLDER = Path(__file__).parent
 
@@ -31,33 +34,22 @@ class MissedRulesObserver:
         ahk.run("SetTimer, RemoveToolTip, 1500")
 
     def get_tooltip_coordinates(self) -> tuple[int, int]:
-        screens = mss.mss().monitors[1:]
-
-        values = sorted([screen["left"] for screen in screens])
-        x = self.get_mouse_pos()[0]
-
-        range_start = self.find_range(values, x)
-        width, height = [
-            (screen["width"], screen["height"])
-            for screen in screens if screen["left"] == range_start
-        ][0]
-
+        width, height = self.get_active_window_screen_dimensions()
         return width // 2 - 75, height // 2
 
+    # noinspection PyUnresolvedReferences
     @staticmethod
-    def get_mouse_pos() -> tuple[int, int]:
-        class POINT(ctypes.Structure):
-            _fields_ = [("x", ctypes.c_long), ("y", ctypes.c_long)]
+    def get_active_window_screen_dimensions() -> tuple[int, int]:
+        hwnd = win32gui.GetForegroundWindow()
 
-        point = POINT()
-        ctypes.windll.user32.GetCursorPos(ctypes.byref(point))
-        return point.x, point.y
+        screen = win32api.MonitorFromWindow(
+            hwnd, win32con.MONITOR_DEFAULTTONEAREST
+        )
 
-    @staticmethod
-    def find_range(values, x) -> int:
-        for i in range(len(values) - 1):
-            if values[i] <= x <= values[i + 1]:
-                return values[i]
+        monitor_info = win32api.GetMonitorInfo(screen)
 
-        if x >= values[-1]:
-            return values[-1]
+        left, top, right, bottom = monitor_info['Monitor']
+        screen_width = right - left
+        screen_height = bottom - top
+
+        return screen_width, screen_height
